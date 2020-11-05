@@ -41,6 +41,8 @@ class PostsController extends Controller
 
     public function store(Request $request){
 
+        //Fazer a parte de attach() / detach() ->tags()
+
         $request->validate([
             'title' => ['required', 'min:5'],
             'body' => ['required', 'min:5', 'max:255'],
@@ -49,6 +51,7 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->user_id = '1';
 
         $post->save();
 
@@ -61,7 +64,8 @@ class PostsController extends Controller
 
         */
 
-        return redirect('/posts');
+        return redirect('/posts')
+            ->with('message', 'Post criado!');;
     }
 
     //FUNÇÕES DE EDIÇÃO
@@ -79,16 +83,20 @@ class PostsController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
 
+
         $post->save();
 
-        return redirect('/posts');
+        return redirect('/posts')
+            ->with('message', 'Post atualizado!');
     }
 
     //FUNÇÃO DE DELEÇÃO
-    public function destroy(Post $post){
+    public function delete(Post $post){
 
-        $post->destroy($post->id);
+        $id = $post->id;
+        Post::destroy($id);
 
-        return redirect('/posts');
+        return redirect('/posts')
+            ->with('message', 'Post deletado!');;
     }
 }

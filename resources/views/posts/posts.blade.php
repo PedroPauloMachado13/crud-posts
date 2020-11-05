@@ -14,6 +14,7 @@
                 <a href="http://localhost/example/public/posts/{{ $p->id }}/edit" class="btn btn-primary" style="opacity: 0.7; color: black">Editar</a>
                 <form method="POST" action="{{ route('posts.delete', $p->id) }}">
                     @csrf
+                        <br>
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger" style="opacity: 0.7; color: black">Deletar</button>
                         </div>
