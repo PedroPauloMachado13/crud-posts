@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Isset_;
 
 class PostsController extends Controller
 {
@@ -23,7 +25,7 @@ class PostsController extends Controller
     public function doSearch(Request $request){
 
         $request->validate([
-            'title' => ['required','min:5'],
+            'title' => ['required','min:5','exists'],
         ]);
 
         $title = $request->title;
@@ -35,23 +37,31 @@ class PostsController extends Controller
 
     //FUNÇÕES DE CRIAÇÃO
     public function create(){
+        $tags = Tag::all();
 
-        return view('posts.create');
+        return view('posts.create', compact('tags'));
     }
 
     public function store(Request $request){
 
         //Fazer a parte de attach() / detach() ->tags()
+        ddd($request);
 
         $request->validate([
             'title' => ['required', 'min:5'],
             'body' => ['required', 'min:5', 'max:255'],
+           // 'tag' => ['exists']
         ]);
 
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->user_id = '1';
+        $tags = $request->tag;
+
+        foreach ($tags as $t) {
+            $post->assignTag($t);
+        }
+        $post->user_id = '1';  // Auth::user()->id;
 
         $post->save();
 

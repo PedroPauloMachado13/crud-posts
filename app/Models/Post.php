@@ -24,6 +24,11 @@ class Post extends Model
 
     public function tag(){
 
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function assignTag(Tag $tag){
+
+        $this->tag()->save($tag);
     }
 }
