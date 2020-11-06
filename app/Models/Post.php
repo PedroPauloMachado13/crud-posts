@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -27,8 +28,10 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function assignTag(Tag $tag){
+    public function assignTag($post,$tag){
 
-        $this->tag()->save($tag);
+        $this->tag();
+        DB::insert('insert into posts_tags (post_id, tag_id) values (?, ?)', [$post, $tag]);
+
     }
 }

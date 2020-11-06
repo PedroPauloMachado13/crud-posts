@@ -45,7 +45,7 @@ class PostsController extends Controller
     public function store(Request $request){
 
         //Fazer a parte de attach() / detach() ->tags()
-        ddd($request);
+        //ddd($request);
 
         $request->validate([
             'title' => ['required', 'min:5'],
@@ -56,15 +56,16 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->user_id = '1';  // Auth::user()->id;
+        $post->save();
+
+        $post_id = $post->id;
+
         $tags = $request->tag;
 
         foreach ($tags as $t) {
-            $post->assignTag($t);
+            $post->assignTag($post_id, $t);
         }
-        $post->user_id = '1';  // Auth::user()->id;
-
-        $post->save();
-
         /*
 
         Post::create($request->validate([
