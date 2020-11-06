@@ -31,7 +31,13 @@ class Post extends Model
     public function assignTag($post,$tag){
 
         $this->tag();
-        DB::insert('insert into posts_tags (post_id, tag_id) values (?, ?)', [$post, $tag]);
+        DB::insert('insert into post_tag (post_id, tag_id, created_at, updated_at) values (?, ?, ?, ?)', [$post, $tag, now(), now()]);
+
+    }
+
+    public function list(){
+
+        return $this->tag()->pluck('name');
 
     }
 }
