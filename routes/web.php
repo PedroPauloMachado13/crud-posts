@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ Route::get('/', function(){
     return redirect('/posts');
 } );
 
+//Rota de Tags
+Route::get('/posts/tag', [PostsController::class, 'getPostsForTag'])->name('posts.tags');
+
 //Rota de busca por post especifico
 Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 Route::post('/posts/search', [PostsController::class, 'doSearch'])->name('posts.get');
@@ -35,3 +39,7 @@ Route::post('/posts/update', [PostsController::class, 'update'])->name('posts.up
 //Rota de Deleção
 Route::post('/posts/{post}/delete', [PostsController::class, 'delete'])->name('posts.delete');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

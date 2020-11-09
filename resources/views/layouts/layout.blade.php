@@ -54,30 +54,40 @@ http://www.tooplate.com/view/2102-constructive
 				<div class="inner">
 					<nav id="tmMainNav" class="tm-main-nav">
 						<ul>
-							<li>
-								<a href="http://localhost/example/public/posts" id="tmNavLink1" class="scrolly active" data-bg-img="constructive_bg_01.jpg">
-									<i class="fas fa-home tm-nav-fa-icon"></i>
-									<span>Posts</span>
-								</a>
-							</li>
-							<li>
-								<a href="http://localhost/example/public/posts/create" id="tmNavLink2" class="scrolly" data-bg-img="constructive_bg_01.jpg">
-									<i class="fas fa-plus tm-nav-fa-icon"></i>
-									<span>Create</span>
-								</a>
-							</li>
-							<li>
-								<a href="http://localhost/example/public/posts/search" class="scrolly" data-bg-img="constructive_bg_01.jpg">
-									<i class="fas fa-search tm-nav-fa-icon"></i>
-									<span>Search</span>
-								</a>
-							</li>
-							<li>
-								<a href="http://localhost/example/public/about" class="scrolly" data-bg-img="constructive_bg_01.jpg">
-									<i class="fas fa-comments tm-nav-fa-icon"></i>
-									<span>About Us</span>
-								</a>
-							</li>
+                            @if(Auth::guard('web')->check())
+                                <li>
+                                    <a href="http://localhost/example/public/posts" id="tmNavLink1" class="scrolly active" data-bg-img="constructive_bg_01.jpg">
+                                        <i class="fas fa-home tm-nav-fa-icon"></i>
+                                        <span>Posts</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://localhost/example/public/posts/create" id="tmNavLink2" class="scrolly" data-bg-img="constructive_bg_01.jpg">
+                                        <i class="fas fa-plus tm-nav-fa-icon"></i>
+                                        <span>Create</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://localhost/example/public/posts/search" class="scrolly" data-bg-img="constructive_bg_01.jpg">
+                                        <i class="fas fa-search tm-nav-fa-icon"></i>
+                                        <span>Search</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- FAZER O FORM DE LOGOUT AQUI DEPOIS-->
+                                    <a href="http://localhost/example/public/logout" class="scrolly" data-bg-img="constructive_bg_01.jpg">
+                                        <i class="fas fa-user tm-nav-fa-icon"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="http://localhost/example/public/home" class="scrolly" data-bg-img="constructive_bg_01.jpg">
+                                        <i class="fas fa-user tm-nav-fa-icon"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                            @endif
 						</ul>
 					</nav>
 				</div>

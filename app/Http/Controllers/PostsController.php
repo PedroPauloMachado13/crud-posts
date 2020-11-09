@@ -111,4 +111,11 @@ class PostsController extends Controller
         return redirect('/posts')
             ->with('message', 'Post deletado!');;
     }
+
+    //
+    public function getPostsForTag(){
+
+        return Tag::list();
+
+    }
 }
