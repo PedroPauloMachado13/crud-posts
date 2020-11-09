@@ -29,17 +29,20 @@
                         <p class="card-text small">Nenhuma tag associada</p>
 
                     @endif
-                    <hr>
-                    <div class="row">
-                        <form method="POST" action="{{ route('posts.delete', $p->id) }}" style="display: flex;">
-                            @csrf
-                                <br>
-                                <div class="form-group" style="margin: 0; padding: 0%;">
-                                    <button type="submit" class="btn btn-danger" style="opacity: 0.7; color: black">Deletar</button>
-                                    <a href="http://localhost/example/public/posts/{{ $p->id }}/edit" class="btn btn-primary" style="opacity: 0.7; color: black">Editar</a>
-                                </div>
-                        </form>
-                    </div>
+
+                    @if ($p->id == Auth::user()->id)
+                        <hr>
+                        <div class="row">
+                            <form method="POST" action="{{ route('posts.delete', $p->id) }}" style="display: flex;">
+                                @csrf
+                                    <br>
+                                    <div class="form-group" style="margin: 0; padding: 0%;">
+                                        <button type="submit" class="btn btn-danger" style="opacity: 0.7; color: black">Deletar</button>
+                                        <a href="http://localhost/example/public/posts/{{ $p->id }}/edit" class="btn btn-primary" style="opacity: 0.7; color: black">Editar</a>
+                                    </div>
+                            </form>
+                        </div>
+                    @endif
 
                 </div>
             </div>

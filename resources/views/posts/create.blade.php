@@ -15,6 +15,8 @@
         <form method="POST" action="{{ route('posts.store') }}">
             @csrf
 
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
             <div class="form-group">
                 <label for="title">Título</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Título do seu post aqui">

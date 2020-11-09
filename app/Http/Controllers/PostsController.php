@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Isset_;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -51,13 +52,13 @@ class PostsController extends Controller
         $request->validate([
             'title' => ['required', 'min:5'],
             'body' => ['required', 'min:5', 'max:255'],
-           // 'tag' => ['exists']
+            //'tag' => ['exists:tags'],
         ]);
 
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->user_id = '1';  // Auth::user()->id;
+        $post->user_id = $request->user_id;  // Auth::user()->id;
         $post->save();
 
         $post_id = $post->id;
